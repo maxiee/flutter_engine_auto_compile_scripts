@@ -12,7 +12,9 @@ class ProcessDependenciesCheck:
 
     def run(self) -> bool:
         dependencies = [
-            'ant'
+            'ant',
+            'ninja',
+            'git'
         ]
 
         for dep in dependencies:
