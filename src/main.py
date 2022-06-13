@@ -1,7 +1,9 @@
+from cProfile import run
 from re import L
 
 from processes.dependencies import ProcessDependenciesCheck
 from processes.gclient_init import ProcessInitGClient
+from processes.gclient_sync import ProcessGClientSync
 
 
 def print_error():
@@ -11,10 +13,8 @@ def print_error():
 
 if __name__ == '__main__':
     # check dependencies
-    if not ProcessDependenciesCheck().run():
-        print_error()
-
-    if not ProcessInitGClient().run():
-        print_error()
-
-    print('success!')
+    if ProcessDependenciesCheck().run() \
+            and ProcessInitGClient().run() \
+            and ProcessGClientSync().run():
+        print('success!')
+    print_error()

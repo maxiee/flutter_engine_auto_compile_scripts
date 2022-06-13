@@ -17,3 +17,11 @@ This script is written in Python, some dependencies are needed:
 4. `pipenv shell`
 5. in virtual environment,`python src/main.py`
 
+## Proxy
+
+If the cloning speed is too slow, you can try with a proxy, for example:
+
+```
+https_proxy=http://127.0.0.1:8888 python src/main.py
+```
+
