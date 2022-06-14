@@ -17,6 +17,18 @@ This script is written in Python, some dependencies are needed:
 4. `pipenv shell`
 5. in virtual environment,`python src/main.py`
 
+## Usage
+
+```
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  sync  Check dependencies and sync flutter engine source
+```
+
 ## Proxy
 
 If the cloning speed is too slow, you can try with a proxy, for example:
