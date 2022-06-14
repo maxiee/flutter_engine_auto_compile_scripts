@@ -27,6 +27,19 @@ def sync():
 
 
 @click.command()
+@click.argument('version')
+def checkout(version):
+    """Checkout engine to specified version ('v*.*.*',defined in config.yaml)"""
+    config = ConfigUtils.loadConfig()
+    tag = config['tags'][version]
+    checkout_cmd = subprocess.Popen(
+        f'git checkout {tag}',
+        shell=True,
+        cwd=Path().joinpath('engine').joinpath('src').joinpath('flutter'))
+    checkout_cmd.wait()
+
+
+@click.command()
 @click.argument('build_type')
 def build(build_type: str):
     """Build flutter with out type defined in config.yaml"""
@@ -48,4 +61,5 @@ def build(build_type: str):
 if __name__ == '__main__':
     cli.add_command(sync)
     cli.add_command(build)
+    cli.add_command(checkout)
     cli()
