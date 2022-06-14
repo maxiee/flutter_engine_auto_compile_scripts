@@ -1,3 +1,4 @@
+import os
 import subprocess
 from pathlib import Path
 
@@ -5,6 +6,11 @@ from pathlib import Path
 class ProcessGClientSync:
 
     def run(self) -> bool:
+        dart_tools_path = Path().joinpath('engine').joinpath(
+            'src').joinpath('third_party').joinpath('dart').joinpath('tools')
+        new_python_path = f'$PATHONPATH:{dart_tools_path.absolute()}'
+        print(new_python_path)
+        os.environ['PYTHONPATH'] = new_python_path
         p = subprocess.Popen('gclient sync',
                              cwd=Path().joinpath('engine'),
                              shell=True)
