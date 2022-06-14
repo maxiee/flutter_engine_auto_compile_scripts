@@ -6,7 +6,7 @@ import click
 from processes.dependencies import ProcessDependenciesCheck
 from processes.gclient_init import ProcessInitGClient
 from processes.gclient_sync import ProcessGClientSync
-from utils.config_utils import ConfigUtils
+from script_utils.config_utils import ConfigUtils
 
 
 @click.group()

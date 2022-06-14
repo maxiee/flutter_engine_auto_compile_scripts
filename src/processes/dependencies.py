@@ -1,7 +1,7 @@
 import subprocess
 from pathlib import Path
 
-from utils.sys_utils import SystemUtils
+from script_utils.sys_utils import SystemUtils
 
 
 class ProcessDependenciesCheck:
