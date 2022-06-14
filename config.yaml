@@ -1,0 +1,4 @@
+build:
+  host:
+    gn: '--no-lto --runtime-mode debug'
+    out: 'host_debug'

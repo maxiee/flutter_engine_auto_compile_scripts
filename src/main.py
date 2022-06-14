@@ -1,11 +1,12 @@
-from cProfile import run
-from re import L
+import subprocess
+from pathlib import Path
 
 import click
 
 from processes.dependencies import ProcessDependenciesCheck
 from processes.gclient_init import ProcessInitGClient
 from processes.gclient_sync import ProcessGClientSync
+from utils.config_utils import ConfigUtils
 
 
 @click.group()
@@ -20,12 +21,31 @@ def sync():
             and ProcessInitGClient().run() \
             and ProcessGClientSync().run():
         print('success!')
-        exit(0)
+    else:
+        print('compile failed, please review the exception first.')
+        exit(1)
 
-    print('compile failed, please review the exception first.')
-    exit(1)
+
+@click.command()
+@click.argument('build_type')
+def build(build_type: str):
+    """Build flutter with out type defined in config.yaml"""
+    config = ConfigUtils.loadConfig()
+    config_type = config['build'][build_type]
+    gn_cmd = subprocess.Popen(
+        f'./flutter/tools/gn {config_type["gn"]}',
+        cwd=Path().joinpath('engine').joinpath('src'),
+        shell=True)
+    gn_cmd.wait()
+
+    ninja_cmd = subprocess.Popen(
+        f'ninja -C out/{config_type["out"]}',
+        cwd=Path().joinpath('engine').joinpath('src'),
+        shell=True)
+    ninja_cmd.wait()
 
 
 if __name__ == '__main__':
     cli.add_command(sync)
+    cli.add_command(build)
     cli()
