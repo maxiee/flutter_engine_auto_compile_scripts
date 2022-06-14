@@ -26,7 +26,8 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  sync  Check dependencies and sync flutter engine source
+  build  Build flutter with out type defined in config.yaml
+  sync   Check dependencies and sync flutter engine source
 ```
 
 ## Proxy
